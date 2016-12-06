@@ -18,46 +18,19 @@ angular.module('App', ['ui.router'])
 .factory('Users', function($http){
   var o = {
     yourName: 'SexyThang',
-    users: [
-      {
-        name: "Joos",
-        picture: 'picture',
-        description: 'I\'ve escaped death many times',
-        votes: 0
-      },
-      {
-        name: "Lisa",
-        picture: 'picture',
-        description: 'HR50\'s #1 sweetheart',
-        cool: 0,
-        votes: 0
-      },
-      {
-        name: "Emm",
-        picture: 'picture',
-        description: 'deepsea diving, searching for that treasure',
-        cool: 0,
-        votes: 0
-      },
-      {
-        name: "Fiona",
-        picture: 'picture',
-        description: 'Straight up to my faaaace',
-        cool: 0,
-        votes: 0
-      },
-      {
-        name: "Casey",
-        picture: 'picture',
-        description: 'SMILEY!!',
-        cool: 0,
-        votes: 0
-      }
-    ]
+    users: [],
+    chats: []
   }
+
   o.getUsers = function() {
     return $http.get('/users').success(function(data){
       angular.copy(data, o.users)
+    })
+  }
+
+  o.getChats = function(){
+    return $http.get('/chats').success(function(data){
+      angular.copy(data, o.chats)
     })
   }
 
@@ -65,8 +38,12 @@ angular.module('App', ['ui.router'])
   o.current = 0;
 
   o.upvote = function(user){
+    console.log(user._id, "id")
+    return $http.post('/upvote', user).success(function(data){
+      user.upvote++;
+      console.log(data);
+    })
     console.log('helllo')
-    user.votes++;
   }
 
   o.nextUser = function(){
@@ -86,7 +63,7 @@ angular.module('App', ['ui.router'])
   return o;
 })
 
-.controller('AppController', function($scope, Users){
+.controller('AppController', function($scope, $http, Users){
   $scope.test = 'Tinder for HR50';
   $scope.users = Users.users;
   $scope.upvote = Users.upvote;
@@ -102,18 +79,24 @@ angular.module('App', ['ui.router'])
 
 })
 
-.controller('ChatController', function($scope, Users){
-  $scope.messages = []
+.controller('ChatController', function($scope, $http, Users){
+  Users.getChats();
+  $scope.messages = Users.chats;
+  console.log($scope.messages, "messages")
   $scope.from = Users.yourName;
   $scope.to = Users.users[Users.current];
 
   $scope.postMessage = function(message) {
-    $scope.messages.push({
+    var chat = {
       from: $scope.from,
       to: $scope.to,
       message: $scope.message
-    })
+    }
 
+    return $http.post('/chats', chat).success(function(data){
+      console.log('posted')
+      $scope.messages.push(data);
+    })
 
   }
 })
