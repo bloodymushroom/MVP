@@ -1,10 +1,43 @@
+img {
+  border: 1px solid;
+  margin-bottom: 20px;
+}
+
 .matchView, .col-md-6 {
   text-align: center;
 }
 
 .matchView {
+  height: 500px;
   border: 2px solid;
   border-radius: 25px;
-  background-color: #FDE3A7;
+  background-color: #F1A9A0;
 /*  background-image: url("http://images.all-free-download.com/images/graphiclarge/valentine_love_backgrounds_vector_set_528328.jpg")
 */}
+
+.chatView {
+  height: 500px;
+  border: 2px solid;
+  border-radius: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #F1A9A0;
+}
+
+.chatRoom {
+  border: 1px solid;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.message-to {
+  text-align: right;
+  color: #446CB3;
+}
+
+.message-from {
+  text-align: left;
+}

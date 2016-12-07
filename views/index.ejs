@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<h1>HR50 Tinder</h1>
+				<h1>HR50 Tinder <span class="glyphicon glyphicon-fire"></span></h1>
 				<span>You are currently logged in as <b>{{yourName}}</b>.</span>
 				<p>
 					<form>
@@ -42,7 +42,7 @@
 			<span><b>Fun Fact:</b> {{users[current].description}}</span>
 			<br>
 			<div>
-				<span>Upvotes: {{users[current].votes}}</span> 
+				<span><b>Upvotes:</b> {{users[current].votes}}</span> 
 				<span ng-click='upvote(users[current])'class="glyphicon glyphicon-thumbs-up"></span>
 			</div>
 			<br>
@@ -57,10 +57,12 @@
 
 		<!-- Chat View -->
 		<script type="text/ng-template" id="/chat.html">
-			<div>
+			<div class='chatView'>
 				<h3>You Liked {{to}}!</h3>
-				<div ng-repeat='message in messages | filter: filterChat| orderBy:"createdAt" '>
-					<b>{{message.from}}</b>: {{message.message}}
+				<div class="chatRoom">
+					<div ng-repeat='message in messages | filter: filterChat| orderBy:"createdAt" '>
+						<div ng-class="message.from === to? 'message-to': 'message-from' "><b>{{message.from}}</b>: {{message.message}}</div>
+					</div>
 				</div>
 				<p>
 					<span>Send a message:</span>
