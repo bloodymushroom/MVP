@@ -33,9 +33,9 @@
 		<!-- User View -->
 		<script type="text/ng-template" id="/home.html">
 		<div class="matchView">
-			<h2><span class="glyphicon glyphicon-heart"></span> Your Match <span class="glyphicon glyphicon-heart"></span></h2>
+			<h4><span class="glyphicon glyphicon-heart"></span> Your Match <span class="glyphicon glyphicon-heart"></span></h4>
 			<!-- Match View-->
-			<h3>{{users[current].name}}</h3>
+			<h1>{{users[current].name}}</h1>
 				<div>
 					<img class="img-rounded" ng-src="{{picUrl}}"></img>
 				</div>
@@ -46,12 +46,12 @@
 				<span ng-click='upvote(users[current])'class="glyphicon glyphicon-thumbs-up"></span>
 			</div>
 			<br>
-			<button ng-click='likeUser(users[current])'>You're Hot!</button>
+			<button class="btn btn-default btn-sm" ng-click='likeUser(users[current])'>You're Hot!</button>
 
 			<a ng-show='users[current].liked' href="#/chat">Chat!</a>
-			<p>
-			<a href='' ng-click='nextUser()'>Next Match</a>
-			</p>
+			<div class="next">
+				<a href='' ng-click='nextUser()'>Next Match<span class="glyphicon glyphicon-chevron-right"></span></a>
+			<div>
 		</div>
 		</script>
 
@@ -68,7 +68,7 @@
 					<span>Send a message:</span>
 					<form>
 						<input type='text' ng-model='message' placeholder='Message here'></input>
-						<button type='submit' ng-click='postMessage(message)'>Send</button>
+						<button type='submit' class="btn btn-default btn-sm" ng-click='postMessage(message)'>Send</button>
 					</form>
 				</p>
 				<a href='#/home'>Back</a>

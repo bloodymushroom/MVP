@@ -41,3 +41,8 @@ img {
 .message-from {
   text-align: left;
 }
+
+.next {
+  text-align: right;
+  padding-right: 30px;
+}
