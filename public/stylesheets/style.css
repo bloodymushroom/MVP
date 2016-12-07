@@ -1,8 +1,10 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.matchView, .col-md-6 {
+  text-align: center;
 }
 
-a {
-  color: #00B7FF;
-}
+.matchView {
+  border: 2px solid;
+  border-radius: 25px;
+  background-color: #FDE3A7;
+/*  background-image: url("http://images.all-free-download.com/images/graphiclarge/valentine_love_backgrounds_vector_set_528328.jpg")
+*/}

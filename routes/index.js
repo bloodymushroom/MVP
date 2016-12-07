@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var ObjectId = require('mongoose').Types.ObjectId; 
 var User = require('../models/Users');
 var Chat = require('../models/Chats')
 
@@ -38,9 +39,17 @@ var fakeUsers = [
     description: 'SMILEY!!',
     cool: 0,
     votes: 0
+  },
+  {
+    name: "Adam",
+    picture: 'picture',
+    description: 'That\'s savage!',
+    cool: 0,
+    votes: 0
   }
 ]
 
+// User.remove({});
 User.insertMany(fakeUsers);
 
 /* GET home page. */
@@ -102,16 +111,16 @@ router.post('/chats', function(req, res, next) {
 })
 
 router.post('/upvote', function(req, res, next) {
-  console.log('body', req.body._id)
-  User.find(ObjectId(req.body._id)).exec()
-  // .exec().then( function(user) {
-  //   console.log('found user', user)
-  //   user.votes++;
-  //   user.save();
-  //   res.json(user);
-  // }).catch(function(err){
-  //   console.error(err);
-  // })
+  User.findById(req.body._id, function(err, user){
+    user.votes++;
+    user.save(function(err, updatedUser){
+      if (err) { console.error(err); }
+
+      res.send(updatedUser);
+    })
+    console.log('found by id: ', user);
+  })
 })
+
 
 module.exports = router;
